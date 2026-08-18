@@ -158,6 +158,46 @@ Percentages above are illustrative placeholders. Each becomes real only when
 measured end-to-end through the doc 10 harness — and **savings do not add**
 (doc 10 §7), so the stack must be measured together, not summed.
 
+[17 — Optimization Catalog §6](17-optimization-catalog.md) maps the round-one
+systems onto this table. Two findings from that analysis change what to expect
+here:
+
+- The **router** supplies most of the movement (~88% of every downrouted step).
+  If only one optimization ships, it should be that one.
+- The **prompt reducer** contributes ~nothing directly — it is a 2.4× net loss
+  as a token saver, and earns its place by making the router accurate. Do not
+  book savings for it in this model.
+
+## 7a. Two features that push cost the other way
+
+Not everything on the roadmap reduces cost. Both of these are contained by
+design rather than by hope:
+
+| Feature | Effect on cost | Containment |
+|---|---|---|
+| **Ultra-thinking** (doc 18) | Would be 3–10× per slot if sub-agents got their own rate ceilings | Sub-agents share the parent's bucket → **cost identical to a normal slot** |
+| **Free public agent** (doc 20) | Unbounded — no subscription bounds it | Hard token caps + class S + Pool-B + heavy caching + a monthly budget that trips automatically |
+
+Ultra-thinking is worth stating plainly because it is counter-intuitive: it
+raises **duty cycle** (more of the held time is generating) without raising
+**cost per slot-hour**. If both rise together, the rate bucket is leaking —
+that is invariant I-8 failing, and it is the alert to build.
+
+## 7b. Contributed compute (doc 19)
+
+A cost *offset*, not a cost reduction, and a modest one:
+
+| Quantity | Value |
+|---|---|
+| Contributor electricity | $0.052 / hr |
+| Our cost for equivalent compute | $0.625 / hr |
+| Viable credit band | $0.05 – $0.62 / hr |
+
+There is genuine margin, but uncapped 24/7 contribution earns $146–219/month —
+more than the plan it discounts. Hence the three caps in doc 19 §4. Model it as
+a **retention feature with a capacity bonus**, and do not book it as capacity in
+the fleet sizing below.
+
 ## 8. Fleet sizing
 
 ```

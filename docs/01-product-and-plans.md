@@ -48,6 +48,8 @@ A customer on a 5-slot plan may own 500 agents and run any 5 of them at a time.
 | Priority class | P2 | P1 | P1 | P0 | P0 | P0 + reserved |
 | Idle reap | 5 min | 30 min | 60 min | 60 min | 120 min | Configurable |
 | Tool calls / slot | 2 | 4 | 8 | 8 | 16 | Custom |
+| Ultra-think fan-out | ✗ | 3 | 5 | 5 | 8 | Custom |
+| Compute credits (doc 19) | Benefits only | ✓ | ✓ | ✓ | ✓ | Custom |
 | Seats | 1 | 1 | 3 | 25 | 100 | Custom |
 | Support | Community | Email | Email | Priority | Priority + SLA | TAM |
 
@@ -125,7 +127,9 @@ This is the contract the whole platform reads; nothing else hardcodes a tier.
     "byo_tools": true,
     "private_networking": false,
     "dedicated_pool": false,
-    "optimizations_opt_out": false   // see doc 10 — per-tenant A/B control
+    "optimizations_opt_out": false,  // see doc 10 — per-tenant A/B control
+    "ultra_think": { "enabled": true, "max_fan_out": 5, "max_depth": 2 },
+    "contributed_compute": { "enabled": true, "max_credit_pct": 50 }
   }
 }
 ```

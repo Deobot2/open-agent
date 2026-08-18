@@ -34,8 +34,22 @@ industry meaning and a specific meaning here, the specific one wins.
 | **Reaping** | Reclaiming a slot from an idle or heartbeat-dead session. |
 | **Fail open / fail closed** | Lease *renewals* fail open (keep running); *acquisitions* fail closed (refuse). |
 | **Entitlements** | The machine-readable limit object. The only source of tier behavior. |
-| **Invariant (I-1..I-7)** | Properties every change must preserve. Listed in doc 02 §3. |
-| **Decision (D-01..D-07)** | Open architectural decisions tracked in PLAN.md §7. |
+| **Invariant (I-1..I-8)** | Properties every change must preserve. Listed in doc 02 §3. |
+| **Decision (D-01..D-18)** | Open architectural decisions tracked in PLAN.md §7. |
+| **Skill** | A written procedure injected into context. Costs tokens while loaded — hence progressive disclosure. |
+| **Progressive disclosure** | L0 skill names always in context; L1 bodies only on match; L2 files on demand. Doc 16 §2. |
+| **Auto-skill maker** | Offline system that turns repeated successful traces into reusable skills. Doc 16 §5. |
+| **Caveman** | Telegraphic compression (drop articles/filler, keep content words). Applied at authoring time, not per request. |
+| **Prompt reducer** | Typo/intent normalization of the user's message. Valued for router accuracy, not token savings. |
+| **Router** | Stage 3 classifier choosing model class per step. The largest single saving (~88% of a downrouted step). |
+| **State saver** | Session-scoped store of reduced prompts, prefixes, routes and matches, enabling warm starts. |
+| **Ultra-thinking** | Premium mode using sub-agents. Slower, deeper, and cost-neutral because sub-agents share the parent's rate bucket. |
+| **Sub-agent** | Ephemeral worker inside an ultra-think run. Holds no slot; draws from the parent's bucket (invariant I-8). |
+| **Contributed compute** | User hardware running work for credit. Doc 19. |
+| **Privacy class** | `own` / `public` / `tenant` — hard filter on where a work unit may be dispatched. Doc 19 §6. |
+| **Spot-check** | Re-running a sample of contributed work on trusted hardware to detect fraud. |
+| **Credit** | Invoice discount earned by contributing compute. Capped; never a payment. |
+| **Public agent** | Free, anonymous-access agent used as a funnel. The one surface with a hard token cap. |
 
 ## Words we avoid
 
@@ -46,3 +60,5 @@ industry meaning and a specific meaning here, the specific one wins.
 | "Throttle" (customer-facing) | Sounds punitive. The rate ceiling is a published plan feature. |
 | "Concurrent requests" | Ambiguous. Say **slots** (sold) or **batch size** (engine). |
 | "Token limit" | Reserved for context length, never for a monthly allowance. |
+| "Sub-agent slot" | Sub-agents never hold slots. Say **fan-out**. |
+| "Earnings" (for credits) | Credits are invoice discounts, not payments. The distinction is legal, not cosmetic. |

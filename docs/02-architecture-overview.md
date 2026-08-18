@@ -101,6 +101,11 @@ platform bug, not a feature trade-off.
 | I-5 | Every generated token maps to exactly one usage event | Idempotency key on `(session_id, step_id)` |
 | I-6 | A tenant's data is never in another tenant's prompt | Cache keys namespaced by tenant (see doc 10 §6) |
 | I-7 | Any optimization stage can be disabled per tenant | Stage registry reads entitlements |
+| I-8 | All sub-agents of a session draw from that session's **single** rate bucket | One limiter object per session; CI invariant test |
+
+I-8 exists because sub-agents (doc 18) are the one feature that can multiply a
+slot's consumption without multiplying its price. It is invisible when broken —
+nothing errors, costs just rise — so it is enforced structurally and tested in CI.
 
 I-3 and I-4 pull in opposite directions and the resolution is deliberate:
 **leases fail open for renewal, fail closed for acquisition.** A running agent

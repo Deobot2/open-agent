@@ -41,6 +41,11 @@ Phase 0 benchmark.
 | 13 | [Capacity & Economics](docs/13-capacity-and-economics.md) | The profitability math |
 | 14 | [Repo & Deployment Layout](docs/14-repo-and-deployment-layout.md) | Directory tree, CI/CD |
 | 15 | [Roadmap](docs/15-roadmap.md) | Build phases |
+| 16 | [Agent Capability Layer](docs/16-agent-capability-layer.md) | Skills, tools, plugins, auto-skill maker |
+| 17 | [Optimization Catalog](docs/17-optimization-catalog.md) | The named optimizations, placed and costed |
+| 18 | [Ultra-Thinking Mode](docs/18-ultra-thinking.md) | Sub-agents on a shared token budget |
+| 19 | [Contributed Compute & Credits](docs/19-contributed-compute.md) | User hardware for subscription discounts |
+| 20 | [Free Tier & Public Agent](docs/20-free-tier-and-public-agent.md) | Growth funnel and its cost containment |
 | — | [Glossary](docs/GLOSSARY.md) | Terms used precisely |
 
 ## The core idea

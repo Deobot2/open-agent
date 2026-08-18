@@ -127,6 +127,11 @@ Read in order for the full picture; each is independently useful.
 | 13 | [Capacity & Economics](docs/13-capacity-and-economics.md) | The profitability math, worst-case model |
 | 14 | [Repo & Deployment Layout](docs/14-repo-and-deployment-layout.md) | Directory tree, environments, CI/CD |
 | 15 | [Roadmap](docs/15-roadmap.md) | Build phases |
+| **16** | [Agent Capability Layer](docs/16-agent-capability-layer.md) | Skills, tools, plugins, auto-skill maker |
+| **17** | [Optimization Catalog](docs/17-optimization-catalog.md) | Caveman, reducer, router, state saver — placed and costed |
+| **18** | [Ultra-Thinking Mode](docs/18-ultra-thinking.md) | Sub-agents without breaking the slot model |
+| **19** | [Contributed Compute & Credits](docs/19-contributed-compute.md) | User hardware, discounts, fraud |
+| **20** | [Free Tier & Public Agent](docs/20-free-tier-and-public-agent.md) | The funnel, and the one place caps are required |
 | — | [Glossary](docs/GLOSSARY.md) | Terms used precisely throughout |
 
 ## 5. Where the optimizations go
@@ -147,12 +152,23 @@ with a defined contract, so those systems drop in without re-architecting:
   Inference
 ```
 
-Every optimization you describe will land in one of those five stages. The
-contract for each is specified in
+The contract for each is specified in
 [`docs/10-optimization-framework.md`](docs/10-optimization-framework.md), along
 with a stub registry, a measurement harness, and the rule that **every stage
 must be independently disableable per tenant** so we can A/B any optimization
 against real traffic.
+
+**The first round of systems is now placed** — see
+[`docs/17-optimization-catalog.md`](docs/17-optimization-catalog.md):
+
+| System | Stage | Finding |
+|---|---|---|
+| State saver | 5 → 1/2 | Cheapest win; build first |
+| Skills / tools | 2 | Net saver **only** if bodies load conditionally (doc 16) |
+| Caveman compression | 2 | Compress at authoring time, not per request |
+| Prompt reducer | 2 | Not a token saver — its ROI is router accuracy |
+| Router (small vs. large) | 3 | **88% of a step.** The biggest win on the list |
+| Ultra-thinking | — | Cost *multiplier*; contained by sharing the slot's budget (doc 18) |
 
 ## 6. Deliberate non-goals for v0.1
 
@@ -164,6 +180,7 @@ We are building the skeleton. These are consciously deferred, not forgotten:
 - No autoscaling beyond a fixed floor/ceiling per pool.
 - No optimization implementations — only the seams they mount to.
 - No marketplace, no BYO-model, no fine-tune hosting.
+- No contributed compute, credits, or free public agent (docs 19–20 are Phase 6).
 
 ## 7. Open decisions
 
@@ -178,6 +195,17 @@ Tracked here so they do not get silently resolved by accident.
 | D-05 | Per-slot rate ceiling value | Phase 2 | The single most important business number |
 | D-06 | Overcommit ratio (slots sold : slots servable) | Phase 2 | Derived from measured duty cycle |
 | D-07 | Cold-start policy for idle slots | Phase 2 | Trade memory for latency |
+| D-08 | Contributed compute: self-serve only, or volunteer pool too? | Phase 6 | Start self-serve; privacy rules out the rest |
+| D-09 | Credits as invoice discount only, or free-tier currency? | Phase 6 | Discount-only is far simpler legally |
+| D-10 | Credit rate and cap % | Phase 6 | Uncapped can out-earn the subscription |
+| D-11 | Contributor client form factor | Phase 6 | Desktop app / CLI / container |
+| D-12 | CPU-only contribution supported? | Phase 6 | Affects addressable contributor base |
+| D-13 | Tax treatment of credits | Phase 6 | **Get advice** — discount ≠ payment |
+| D-14 | Free tier: anonymous, or email required? | Phase 6 | Friction vs. abuse |
+| D-15 | Free-tier monthly budget ceiling | Phase 6 | Must be a hard, automatic trip |
+| D-16 | Public agent: product or demo? | Phase 6 | Changes how much it gets invested in |
+| D-17 | Do contributor benefits stack with a paid plan? | Phase 6 | — |
+| D-18 | Public agent moderation posture | Phase 6 | Anonymous LLM access is abuse-prone |
 
 ---
 

@@ -300,8 +300,11 @@ traffic is already possible.
 
 ## 9. Slots reserved for your systems
 
-You mentioned a set of token-reduction systems to add. Drop each into the stage
-that matches its mechanism:
+**Round one is placed — see [17 — Optimization Catalog](17-optimization-catalog.md)
+for each system's mechanism, net-savings analysis, and risk class.** The mapping
+table below stays as the intake rule for everything added later.
+
+Drop each new system into the stage that matches its mechanism:
 
 | If the system… | It is Stage | Notes for integration |
 |---|---|---|
@@ -310,7 +313,16 @@ that matches its mechanism:
 | Picks a cheaper model/pool | **3 ROUTE** | Count escalations; measure net |
 | Changes how tokens are produced | **4 DECODE** | Pool-E capacity is reserved for draft/aux models |
 | Builds state for future steps | **5 SETTLE** | Namespace by tenant (I-6) |
-| Doesn't fit any of these | — | **Tell me — it may need a sixth stage or a scheduler-level hook** |
+| Doesn't fit any of these | — | **Flag it — it may need a sixth stage or a scheduler-level hook** |
+
+Two systems from round one did *not* fit the five stages, which is the intake
+rule working as intended:
+
+| System | Where it went | Why |
+|---|---|---|
+| **Auto-skill maker** (doc 16 §5) | Offline / batch | Generates artifacts between sessions, not during a step |
+| **Ultra-thinking** (doc 18) | Runtime orchestration | Increases cost; contained by the rate bucket, not a stage |
+| **Contributed compute** (doc 19) | Capacity layer | Changes *where* work runs, not what work happens |
 
 Two seams beyond the five stages already exist for systems that are not
 per-step: **the scheduler** (doc 06) for cross-session batching, off-peak
@@ -324,6 +336,9 @@ model versions or engine configs per workload.
 - Experiment assignment / bucketing service
 - Cross-session and cross-tenant optimization (needs isolation review first)
 - Learned/adaptive routing policies
+
+Round-one systems are specified in doc 17 but not implemented; the framework
+still ships before any of them (doc 15, Phase 4).
 
 ---
 *Next: [11 — Observability](11-observability.md)*

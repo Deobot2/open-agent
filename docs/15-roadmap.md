@@ -73,8 +73,18 @@ and we can see what they cost us.
 - [ ] Shadow mode (compute without apply)
 - [ ] Offline replay corpus + eval suite
 - [ ] Savings attribution end-to-end (`tokens_saved`, `stages_applied`)
-- [ ] **Then: implement your optimizations, one per stage, each through the gate**
 - [ ] Re-derive doc 13 with measured savings
+
+Then the round-one systems, in the build order from doc 17 §7 — cheapest and
+safest first, the high-value risky one once the harness can measure it:
+
+- [ ] **State saver** (doc 17 §5) — LOW risk, enables everything else
+- [ ] **Skills with progressive disclosure** (doc 16) — L0/L1/L2 loading
+- [ ] **Prompt reducer, non-LLM tier** (doc 17 §3) — near-free, feeds the router
+- [ ] **Caveman on system prompts + skill bodies** (doc 17 §2) — authoring-time
+- [ ] **Router tiers 0–1** (doc 17 §4) — the 88% win, behind an eval gate
+- [ ] **Auto-skill maker** (doc 16 §5) — offline, shadow-then-promote
+- [ ] **Ultra-thinking** (doc 18) — shared rate bucket, invariant I-8 tested first
 
 **Exit:** measured, net cost-per-token reduction with no quality regression, and
 a break-even utilization materially above the baseline.
@@ -91,6 +101,27 @@ is working, and the one nobody dares remove.
 - [ ] Enterprise: dedicated pools, SSO, audit export
 - [ ] Multi-region (if demanded)
 
+## Phase 6 — Growth: free tier & contributed compute
+
+**Goal: a funnel, and an aligned way for users to lower our costs.**
+
+- [ ] Free public agent on Pool-B, class S, hard daily caps (doc 20)
+- [ ] **Aggressive caching proved on public traffic first** — high volume, no
+      paying customer at risk, clean signal on hit rates
+- [ ] Anonymous → email → contributor allowance ladder
+- [ ] `oa-contrib`: node registry, dispatcher, verifier, credit ledger (doc 19)
+- [ ] Contributor client, sandboxed, self-serve (Model A) only
+- [ ] Spot-check verification + reputation before any credit is issued
+- [ ] Credit caps enforced: C-1 (% of plan), C-2 (dispatched work only), C-3 (rate)
+- [ ] Decide D-08..D-18
+
+**Exit:** the free tier runs inside a hard monthly budget, and contributed
+compute measurably offloads Pool-E without a fraud problem.
+
+Deliberately last. It depends on the optimization layer (the free tier is only
+affordable with a high cache hit rate) and on metering being trustworthy
+(credits are money). Building it earlier means paying for it twice.
+
 ## Sequencing rules
 
 Three orderings are not negotiable, each for the same reason — measurement
@@ -101,6 +132,8 @@ before commitment:
 | **Phase 0 before pricing** | Pricing without measured throughput is a guess with a payment page attached |
 | **Framework before optimizations** | Unmeasurable savings are indistinguishable from none |
 | **Metering before scale** | Scaling an unprofitable unit economics makes it worse, faster |
+| **Caching before the free tier** | An uncached public agent is an unbounded bill |
+| **Verification before credits** | A credit is money; unverified work is free money |
 
 ## Parallelizable
 
